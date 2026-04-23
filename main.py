@@ -27,20 +27,13 @@
         finally:
             cursor.close()
 
-db_config = {
-    'host': 'srv221-h-st.jino.ru',
-    'user': 'j30084097_13418',
-    'password': 'pPS090207/()',
-    'database': 'j30084097_13418',
-    'port': 3306
-}
 
 if __name__ == "__main__":
     TBL_STUDENTS = 'test_students'
     TBL_COURSES = 'test_courses'
     TBL_ARCHIVES = 'test_archives'
 
-    db = SQLTable(db_config, TBL_STUDENTS, db_type='mysql')
+    db = SQLTable(TBL_STUDENTS, db_type='mysql')
     db.drop_table()
     db.create_table('id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mark INT')
 
@@ -51,7 +44,7 @@ if __name__ == "__main__":
     for s in db.select(condition="mark > 4"):
         print(s)
 
-    db_courses = SQLTable(db_config, TBL_COURSES, db_type='mysql')
+    db_courses = SQLTable(TBL_COURSES, db_type='mysql')
     db_courses.drop_table()
     db_courses.create_table('id INT AUTO_INCREMENT PRIMARY KEY, student_id INT, subject VARCHAR(50)')
 
@@ -67,7 +60,7 @@ if __name__ == "__main__":
         columns=f'{TBL_STUDENTS}.name, {TBL_COURSES}.subject'
     )
 
-    db_archives = SQLTable(db_config, TBL_ARCHIVES, db_type='mysql')
+    db_archives = SQLTable(TBL_ARCHIVES, db_type='mysql')
     db_archives.drop_table()
     db_archives.create_table('id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), mark INT')
     db_archives.insert({'name': 'Katerina', 'mark': 3})
